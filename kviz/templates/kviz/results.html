@@ -1,0 +1,9 @@
+{% if seznam_kategorij %}
+    <ul>
+    {% for kategorija in seznam_kategorij %}
+        <li><a href="{% url 'kviz:detail' kategorija.id %}">{{ kategorija.category_text }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}

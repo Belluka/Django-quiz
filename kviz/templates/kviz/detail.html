@@ -1,0 +1,16 @@
+<h1>{{ kategorija.category_text }}</h1>
+<ul>
+{% for question in vprasanja %}
+    <h2>{{ question.question_text }}</h2>
+    {% for odgovor in odgovori %}
+	    {% if question.id == odgovor.question.id %}
+	    	<form action="/kviz/{{ kategorija.id }}/results/" method="post">
+	    	{% csrf_token %}
+		    	<input type="radio" name="izbira" value="{{ odgovor.id }}">{{ odgovor.answer_text1 }}<br>
+			    <input type="radio" name="izbira" value="{{ odgovor.id }}">{{ odgovor.answer_text2 }}<br>
+			    <input type="radio" name="izbira" value="{{ odgovor.id }}">{{ odgovor.answer_text3 }}<br>
+	    {% endif %}
+    {% endfor %}
+{% endfor %}
+</ul>
+<input type="submit" name="ocena" value="oceni test">
