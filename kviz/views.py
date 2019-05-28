@@ -18,6 +18,16 @@ def detail(request, category_id):
 def results(request, category_id):
 	kategorija = get_object_or_404(Category, pk=category_id)
 	odgovori = Answers.objects.all()
-	selected_answer = odgovori.get(pk=request.POST['izbira'])
-	return HttpResponse(selected_answer)
+	selected_answer_list = request.POST.getlist('izbran_odgovor')
+	selected_answer = map(int, selected_answer_list)
+	
+	counter = odgovori.count()
+	pravilni = 0
+	for odgovor in odgovori:
+		for i in selected_answer_list:
+			if int(i) == odgovor.id and odgovor.solution:
+				pravilni+=1
+
+	context = {'kategorija': kategorija, 'odgovori': odgovori, 'selected_answer': selected_answer, 'counter': counter, 'pravilni': pravilni}
+	return render(request, 'kviz/results.html', context)
 

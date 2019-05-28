@@ -9,7 +9,5 @@ class Question(models.Model):
 
 class Answers(models.Model):
 	question = models.ForeignKey(Question, on_delete=models.CASCADE)
-	answer_text1 = models.CharField(max_length=200, default="vnesi vprasanje")
-	answer_text2 = models.CharField(max_length=200, default="vnesi vprasanje")
-	answer_text3 = models.CharField(max_length=200, default="vnesi vprasanje")
-	solution_text = models.CharField(max_length=200)
+	answer_text = models.CharField(max_length=200, default="vnesi vprasanje")
+	solution = models.BooleanField(default=False)

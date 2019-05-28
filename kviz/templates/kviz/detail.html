@@ -6,9 +6,7 @@
 	    {% if question.id == odgovor.question.id %}
 	    	<form action="/kviz/{{ kategorija.id }}/results/" method="post">
 	    	{% csrf_token %}
-		    	<input type="radio" name="izbira" value="{{ odgovor.id }}">{{ odgovor.answer_text1 }}<br>
-			    <input type="radio" name="izbira" value="{{ odgovor.id }}">{{ odgovor.answer_text2 }}<br>
-			    <input type="radio" name="izbira" value="{{ odgovor.id }}">{{ odgovor.answer_text3 }}<br>
+		    	<input type="checkbox" name="izbran_odgovor" value="{{ odgovor.id }}">{{ odgovor.answer_text }}<br>
 	    {% endif %}
     {% endfor %}
 {% endfor %}
